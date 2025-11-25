@@ -2,10 +2,13 @@
 
 {% block body %}
     {% block header %}
-        <header class="jumbotron bg-dark">
-            <div class="container">
+
+
+        <header class="jumbotron bg-dark p-3">
+            <div class="d-flex justify-content-between align-items-center">
                 {% block header_content %}
-                    <h1><a href="{# path('tasklist_list') #}" class="text-white">My Todo List</a></h1>
+                    <h1 class="text-white m-0"><a href="{# path('tasklist_list') #}">My Todo List</a></h1>
+                    <img src="{{ asset('images/header.png') }}" alt="Header Logo" style="height:90px;">
                 {% endblock %}
             </div>
         </header>
