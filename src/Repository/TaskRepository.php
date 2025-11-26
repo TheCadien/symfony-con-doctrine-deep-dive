@@ -13,4 +13,10 @@ class TaskRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Task::class);
     }
+
+    public function findTasksCreatedToday()
+    {
+        /** Write in DQL */
+    }
+
 }
