@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping\Version;
 
 #[Entity()]
 #[Table(name: 'app_task_lists')]
@@ -24,6 +25,10 @@ class TaskList
     private int|null $id;
 
 
+    #[Version]
+    #[Column(type: 'integer', options: ['unsigned' => true])]
+    private int $version;
+
     #[ManyToOne(targetEntity: User::class)]
     #[JoinColumn(nullable: false)]
     private User $owner;
@@ -32,7 +37,7 @@ class TaskList
     private string $title;
 
     #[Column(type: 'boolean')]
-    private false $archived;
+    private bool $archived;
 
     #[OneToMany(targetEntity: Task::class, mappedBy: "taskList", cascade: ['persist'])]
     private $items;
@@ -44,7 +49,7 @@ class TaskList
     private DateTimeImmutable $created;
 
     #[Column(type: "datetime_immutable", nullable: true)]
-    private DateTimeImmutable $lastUpdated;
+    private ?DateTimeImmutable $lastUpdated = null;
 
     public function __construct(User $owner, string $title)
     {
@@ -57,6 +62,10 @@ class TaskList
         $this->contributors = new ArrayCollection();
     }
 
+    public function archive(): void
+    {
+        $this->archived = true;
+    }
 
     public function addItem(string $summary): void
     {
@@ -115,5 +124,10 @@ class TaskList
     public function getLastUpdatedOn(): ?DateTimeImmutable
     {
         return $this->lastUpdated;
+    }
+
+    public function setLastUpdated(DateTimeImmutable $lastUpdated): void
+    {
+        $this->lastUpdated = $lastUpdated;
     }
 }
