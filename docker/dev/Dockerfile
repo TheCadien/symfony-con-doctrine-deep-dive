@@ -21,9 +21,14 @@ ENV TZ Europe/Berlin
 RUN apt-get update \
     && /usr/sbin/groupadd --gid ${GROUP_ID} training \
     && /usr/sbin/useradd --home-dir /home/training --create-home --uid ${USER_ID} --gid ${GROUP_ID} --shell /bin/sh --skel /dev/null training \
-    && apt-get install -y curl unzip git jq less default-mysql-client ncat nano vim ca-certificates gnupg \
-    && docker-php-ext-install mysqli pdo pdo_mysql \
-    && docker-php-ext-enable pdo_mysql \
+    && apt-get install -y \
+        curl unzip git jq less \
+        default-mysql-client \
+        ncat nano vim \
+        ca-certificates gnupg \
+        libpq-dev \
+    && docker-php-ext-install mysqli pdo pdo_mysql pgsql pdo_pgsql \
+    && docker-php-ext-enable pdo_mysql pdo_pgsql \
     && chown -R training:training /usr/local \
     && apt-get clean \
     && rm -rf /var/cache/apt /var/lib/apt/lists/*
