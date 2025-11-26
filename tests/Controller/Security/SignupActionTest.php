@@ -16,7 +16,7 @@ class SignupActionTest extends WebTestCase
         $client->request('GET', '/signup');
 
         self::assertResponseIsSuccessful();
-        self::assertSelectorTextContains('h1', 'User signup');
+        self::assertSelectorTextContains('.container h1', 'Register for a new account');
         self::assertSelectorTextContains('form', 'Email');
         self::assertSelectorTextContains('form', 'Password');
         self::assertSelectorTextContains('form', 'Repeat password');
