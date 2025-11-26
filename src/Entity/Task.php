@@ -102,4 +102,14 @@ class Task
     {
         $this->listeners[] = $listener;
     }
+
+    public function setDone(bool $done): void
+    {
+        $this->done = $done;
+    }
+
+    public function setCreated(DateTimeImmutable $created): void
+    {
+        $this->created = $created;
+    }
 }

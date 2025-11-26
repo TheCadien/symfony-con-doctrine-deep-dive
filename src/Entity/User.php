@@ -68,4 +68,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->email = $email;
     }
+
+    public function getEncodedPassword(): string
+    {
+        return $this->encodedPassword;
+    }
+
+    public function setEncodedPassword(string $encodedPassword): void
+    {
+        $this->encodedPassword = $encodedPassword;
+    }
 }

@@ -130,4 +130,19 @@ class TaskList
     {
         $this->lastUpdated = $lastUpdated;
     }
+
+    public function getCreated(): DateTimeImmutable
+    {
+        return $this->created;
+    }
+
+    public function setCreated(DateTimeImmutable $created): void
+    {
+        $this->created = $created;
+    }
+
+    public function setArchived(bool $archived): void
+    {
+        $this->archived = $archived;
+    }
 }
