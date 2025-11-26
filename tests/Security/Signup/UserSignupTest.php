@@ -35,9 +35,6 @@ final class UserSignupTest extends KernelTestCase
         self::assertNotSame($request->plainPassword, $registeredUser->getPassword(), 'Encoded password should no longer match plain password');
     }
 
-    /**
-     * @depends testCreatesUserFromSignupRequest
-     */
     public function testFailsWhenEmailIsAlreadyTaken(): void
     {
         $container = static::getContainer();
@@ -47,9 +44,13 @@ final class UserSignupTest extends KernelTestCase
         $request->email = 'jane@example.com';
         $request->plainPassword = 'BF628A5B-F3F7-4E4A-8FFE-FE7475768B59';
 
+        // Create user for first time
+        $signup->signup($request);
+
         $this->expectException(UniqueConstraintViolationException::class);
         $this->expectExceptionMessage('duplicate key value violates unique constraint');
 
+        // Try creating user for second time
         $signup->signup($request);
     }
 
