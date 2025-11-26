@@ -1,5 +1,14 @@
 
 services:
+  dev:
+    container_name: symfony-training-dev
+    build: ./docker/dev
+    ports:
+      - "127.0.0.1:8000:8000" # Local PHP server
+    volumes:
+      - .:/app
+    depends_on:
+      - database
 ###> doctrine/doctrine-bundle ###
   database:
     image: postgres:${POSTGRES_VERSION:-16}-alpine
