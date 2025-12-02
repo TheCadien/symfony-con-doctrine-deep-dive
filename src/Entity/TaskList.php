@@ -70,7 +70,6 @@ class TaskList
     public function addItem(string $summary): void
     {
         $this->items->add(new Task($this, $summary));
-        $this->lastUpdated = new DateTimeImmutable();
     }
 
     public function addContributor(User $user): void
@@ -124,11 +123,6 @@ class TaskList
     public function getLastUpdatedOn(): ?DateTimeImmutable
     {
         return $this->lastUpdated;
-    }
-
-    public function setLastUpdated(DateTimeImmutable $lastUpdated): void
-    {
-        $this->lastUpdated = $lastUpdated;
     }
 
     public function getCreated(): DateTimeImmutable
